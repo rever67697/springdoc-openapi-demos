@@ -18,12 +18,12 @@
 
 package org.springdoc.demo.services.book.model;
 
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Size;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 
 public class Book {
 
-	private long id;
+	private String id;
 
 	@NotBlank
 	@Size(min = 0, max = 20)
@@ -33,11 +33,11 @@ public class Book {
 	@Size(min = 0, max = 30)
 	private String author;
 
-	public long getId() {
+	public String getId() {
 		return id;
 	}
 
-	public void setId(long id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 

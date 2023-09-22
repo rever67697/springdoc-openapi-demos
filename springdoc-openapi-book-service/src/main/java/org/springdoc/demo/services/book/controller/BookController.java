@@ -20,9 +20,9 @@ package org.springdoc.demo.services.book.controller;
 
 import java.util.Collection;
 
-import javax.validation.Valid;
-import javax.validation.constraints.NotNull;
 
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotNull;
 import org.springdoc.demo.services.book.exception.BookNotFoundException;
 import org.springdoc.demo.services.book.model.Book;
 import org.springdoc.demo.services.book.repository.BookRepository;
@@ -49,9 +49,9 @@ public class BookController {
 	private BookRepository repository;
 
 	@GetMapping("/{id}")
-	public Book findById(@PathVariable long id) {
+	public Book findById(@PathVariable("id") String id) {
 		return repository.findById(id)
-				.orElseThrow(() -> new BookNotFoundException());
+				.orElseThrow(BookNotFoundException::new);
 	}
 
 	@GetMapping("/")
@@ -74,6 +74,7 @@ public class BookController {
 	@PostMapping("/")
 	@ResponseStatus(HttpStatus.CREATED)
 	public Book postBook(@NotNull @Valid @RequestBody final Book book) {
+		repository.add(book);
 		return book;
 	}
 
@@ -85,7 +86,7 @@ public class BookController {
 
 	@DeleteMapping("/{id}")
 	@ResponseStatus(HttpStatus.OK)
-	public long deleteBook(@PathVariable final long id) {
-		return id;
+	public void deleteBook(@PathVariable("id") final String id) {
+		repository.remove(id);
 	}
 }

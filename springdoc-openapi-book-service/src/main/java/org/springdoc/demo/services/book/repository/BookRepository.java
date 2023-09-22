@@ -30,9 +30,9 @@ import org.springframework.stereotype.Repository;
 @Repository
 public class BookRepository {
 
-	private Map<Long, Book> books = new HashMap<>();
+	private Map<String, Book> books = new HashMap<>();
 
-	public Optional<Book> findById(long id) {
+	public Optional<Book> findById(String id) {
 		return Optional.ofNullable(books.get(id));
 	}
 
@@ -42,5 +42,9 @@ public class BookRepository {
 
 	public Collection<Book> getBooks() {
 		return books.values();
+	}
+
+	public void remove(String id) {
+		books.remove(id);
 	}
 }
